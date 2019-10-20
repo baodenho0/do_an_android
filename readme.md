@@ -9,7 +9,7 @@ Yêu Cầu Môi trường:
 
 Trỏ vào source
 Chạy lệnh trên command line: "php artisan serve"
-- [URL admin](http://localhost:8000/admin/login). 
+- [URL admin](http://localhost:8000/admin/login) "http://localhost:8000/admin/login". 
 
 ## Test API
 
