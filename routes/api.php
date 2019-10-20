@@ -40,8 +40,12 @@ Route::group(['middleware' => 'jwt.auth'], function() {
 
     Route::get('/website', 'WebsiteController@getWebsite');
     Route::get('/category', 'CategoryController@getCategoryByWebsiteId');
-    Route::get('/news', 'NewsController@getNewsByWebsiteIdAndCategoryId');
+    
 
+    Route::group(['prefix' => 'news'], function() {
+        Route::get('/', 'NewsController@getNewsByWebsiteIdAndCategoryId');
+        Route::get('/detail', 'NewsController@getById');
+    });
     
 
 
