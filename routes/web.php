@@ -27,6 +27,16 @@ Route::group(['prefix' => 'admin'], function() {
     Route::group(['middleware' => 'custom.auth'], function() {
 
         Route::get('/dashboard', 'HomeController@index')->name('home');
+
+        Route::group(['prefix' => 'news-management','namespace'=>'News_Management'], function() {
+            Route::get('website', 'WebsiteController@index')->name('website');
+            Route::get('category', 'CategoryController@index')->name('category');
+            Route::get('news', 'NewsController@index')->name('news');
+        });
+
+        Route::group(['prefix' => 'tool'], function() {
+            Route::get('/','ToolController@index')->name('tool');
+        });
     });
 
 
