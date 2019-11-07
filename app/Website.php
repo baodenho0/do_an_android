@@ -20,7 +20,7 @@ class Website extends Model
 
     protected $guarded = [];
 
-    public static function get(){
+    public static function getAll(){
         return self::select('id','name','url','image')
                     ->where('status',1)
                     ->get();

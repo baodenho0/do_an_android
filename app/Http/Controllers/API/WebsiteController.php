@@ -8,8 +8,9 @@ use App\Website;
 class WebsiteController extends Controller
 {
 	public function getWebsite(Request $request){
-		$website = Website::get();
+		$website = Website::getAll();
 
 		return response()->json(['status'=>1,'data'=>$website],200);
 	}
 }
+// sddssdsd
