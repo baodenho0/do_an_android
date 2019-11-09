@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\News;
 use App\Website;
 use App\Category;
 use App\Http\Helper\CrawlHelper;
@@ -23,36 +24,41 @@ class ToolController extends Controller
     	}
     }
 
-    public function crawl(Request $request, CrawlHelper $crawlHelper){
-        $dom = $crawlHelper->run("https://vietnamnet.vn/vn/the-thao/");
-
-        $content = $dom->find('.box-horizontal-style-2');
+    public function save(Request $request, CrawlHelper $crawlHelper, News $news){
 
 
-        $highlight = $dom->find('.top-cate-new-head',0);
-
-// echo ($highlight->find(".top-cate-new-head-title p",0)); die;
-        $arr = [];
-
-        $arr[] = [
-            'title' => $highlight->find("a img",0)->alt,
-            'url' => $highlight->find("a",0)->href,
-            'image' => $highlight->find("a img",0)->src,
-            'short_content' => $highlight->find(".top-cate-new-head-title p",0)->plaintext
-        ];
+        /**
+         * crawl vietnamnet
+         * url: https://vietnamnet.vn/     
+         * categoris:  
+         *     2 => chinh tri
+         *     3 => thoi su
+         *     4 => kinh doanh
+         *     5 => the thao
+         */
+        if($request->website == 2){
+            switch ($request->category) {       
+                case '2':
+                    $arr = $crawlHelper->crawlChinhTriVietNamNet();
+                    break;  
+                case '3':
+                    $arr = $crawlHelper->crawlThoiSuVietNamNet();
+                    break;  
+                case '4':
+                    $arr = $crawlHelper->crawlKinhDoanhVietNamNet();
+                    break;  
+                case '5':
+                    $arr = $crawlHelper->crawlTheThaoVietNamNet();
+                    break;                     
+                
+            }
+        }
 
         // dd($arr);
-
         
+        $i = $news->saveArrCheckUnique($request->website, $request->category, $arr);
 
-        foreach ($content as $link) {
-            $arr[] = [
-                'title' => $link->find("a img",0)->alt,
-                'url' => $link->find("a",0)->href,
-                'image' => $link->find("a img",0)->src
-            ];            
-        }
-        dd($arr);
+        return back()->with("success",$i." rows saved successfully");
     }
 
 

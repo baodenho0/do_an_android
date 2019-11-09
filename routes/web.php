@@ -36,7 +36,7 @@ Route::group(['prefix' => 'admin'], function() {
 
         Route::group(['prefix' => 'tool'], function() {
             Route::get('/','ToolController@index')->name('tool');
-            Route::post('/','ToolController@crawl')->name('crawl');
+            Route::post('/','ToolController@save')->name('crawl');
 
             Route::get('get-category-by-website-id', 'ToolController@getCategoryByWebsiteId')->name('getCategoryByWebsiteId');
         });

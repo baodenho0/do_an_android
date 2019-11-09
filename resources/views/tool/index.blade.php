@@ -12,7 +12,7 @@
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Crawl</h6>
                     <div class="dropdown no-arrow">
                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -30,10 +30,10 @@
                 <div class="card-body">
                     <form method="post">
                         @csrf
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label>Url: </label>
                             <input class="form-control" type="text" name="url">
-                        </div>
+                        </div> --}}
                         <div class="form-group">
                             <label>Website: </label>
                             <select class="form-control select-website" name="website">

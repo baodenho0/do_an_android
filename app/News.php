@@ -30,4 +30,30 @@ class News extends Model
                     ->where('status',1)
                     ->get();
     }
+
+    public function saveArrCheckUnique($websiteId, $categoryId, $arr){
+        $i = 0;
+        foreach ($arr as $value) {
+            try {
+                $arrSave = [
+                    'website_id' => $websiteId,
+                    'category_id' => $categoryId,
+                    'title' => $value['title'],
+                    'url' => $value['url'],
+                    'short_content' => $value['short_content'] ?? '',
+                    'image' => $value['image'],
+                ];
+
+                self::insert($arrSave);
+                $i++;
+
+            } catch (\Exception $e) {
+                \Log::info($value['url']." have been taken");
+                continue;
+            }
+        }
+        return $i;
+    }
+
+
 }

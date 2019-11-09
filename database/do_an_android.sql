@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 20, 2019 at 09:27 AM
--- Server version: 10.1.36-MariaDB
--- PHP Version: 7.2.10
+-- Host: localhost
+-- Generation Time: Nov 09, 2019 at 11:09 AM
+-- Server version: 10.4.8-MariaDB
+-- PHP Version: 7.3.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,49 +25,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `category`
---
-
-CREATE TABLE `category` (
-  `id` int(10) NOT NULL,
-  `website_id` int(10) NOT NULL,
-  `name` varchar(110) NOT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `status` int(1) NOT NULL DEFAULT '1',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `category`
---
-
-INSERT INTO `category` (`id`, `website_id`, `name`, `image`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 'the thao', NULL, 1, NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `migrations`
---
-
-CREATE TABLE `migrations` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `migrations`
---
-
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2014_10_12_000000_create_users_table', 1),
-(2, '2014_10_12_100000_create_password_resets_table', 1);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `news`
 --
 
@@ -76,12 +33,12 @@ CREATE TABLE `news` (
   `website_id` int(10) NOT NULL,
   `category_id` int(10) NOT NULL,
   `title` varchar(110) NOT NULL,
-  `url` varchar(110) NOT NULL,
+  `url` varchar(255) NOT NULL,
   `short_content` varchar(255) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT '1'
+  `status` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -89,140 +46,102 @@ CREATE TABLE `news` (
 --
 
 INSERT INTO `news` (`id`, `website_id`, `category_id`, `title`, `url`, `short_content`, `image`, `created_at`, `updated_at`, `status`) VALUES
-(1, 1, 1, 'Bầu Đức được CĐV Việt Nam đề xuất đặt tên cho khán đài B sân Mỹ Đình', 'https://saostar.vn/the-thao/bau-duc-duoc-cdv-viet-nam-de-xuat-dat-ten-cho-khan-dai-b-san-my-dinh-6277544.html', '', NULL, NULL, NULL, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `password_resets`
---
-
-CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
-
-CREATE TABLE `users` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `type` int(1) NOT NULL DEFAULT '2' COMMENT '1:admin, 2:customer',
-  `status` int(11) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `name`, `image`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `type`, `status`) VALUES
-(1, 'Le Hiếu', NULL, 'admin@gmail.com', NULL, '$2y$10$MEJVnvEeYgU45ezfIY5KzunkdjT.p32Zr35XZHDaiFnH0BS6UzjUa', NULL, '2019-10-19 02:22:45', '2019-10-19 02:22:45', 1, 1),
-(2, 'customer 1', NULL, '1@gmail.com', NULL, '$2y$10$MEJVnvEeYgU45ezfIY5KzunkdjT.p32Zr35XZHDaiFnH0BS6UzjUa', NULL, NULL, NULL, 2, 1),
-(3, '123456', NULL, '123456@gmail.com', NULL, '$2y$10$zjlem8H/GCVePqpiByDzLulDFxPn1pB58dDXvQje0jCBrHieqE9na', NULL, '2019-10-20 06:57:30', '2019-10-20 07:09:45', 2, 1),
-(5, '123456', NULL, '2@gmail.com', NULL, '$2y$10$3dkiDt9L6InAVO8CZUXBK.x6cO0bLKcA1VDhmSBLQshEo8lqpoXSS', NULL, '2019-10-20 07:24:22', '2019-10-20 07:24:22', 2, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `website`
---
-
-CREATE TABLE `website` (
-  `id` int(10) NOT NULL,
-  `name` varchar(110) NOT NULL,
-  `url` varchar(110) NOT NULL,
-  `image` int(11) DEFAULT NULL,
-  `status` int(1) NOT NULL DEFAULT '1',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `website`
---
-
-INSERT INTO `website` (`id`, `name`, `url`, `image`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'bao moi', 'https://baomoi.com/', NULL, 1, NULL, NULL);
+(1, 2, 5, 'U22 Indonesia lo lắng vì thần đồng chơi bóng ở châu Âu', 'https://vietnamnet.vn/vn/the-thao/sea-games/bong-da-nam/u22-indonesia-lo-lang-vi-than-dong-egy-maulana-sea-games-30-584384.html', ' - U22 Indonesia gặp bất lợi với chấn thương của Egy Maulana Vikri, một trong những tài năng lớn nhất Đông Nam Á, hiện đá ở châu Âu.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/02/18/egy-maulana-u22-indonesia-240x160.jpg', NULL, NULL, 1),
+(2, 2, 5, 'Hoàng Thịnh gửi lời thách đấu \'Messi Thái Lan\' Chanathip', 'https://vietnamnet.vn/vn/the-thao/bong-da-viet-nam/doi-tuyen-viet-nam/tuyen-viet-nam-hoang-thinh-khong-ngai-dau-messi-thai-lan-chanathip-584375.html', ' - Tiền vệ Ngô Hoàng Thịnh nỗ lực giành một suất đá chính ở tuyển Việt Nam, để đối đầu với đối thủ mà anh rất muốn giành chiến thắng là Chanathip của Thái Lan.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/02/17/hoang-thinh-240x160.jpg', NULL, NULL, 1),
+(3, 2, 5, 'Kết quả bóng đá hôm nay 3/11', 'https://vietnamnet.vn/vn/the-thao/bong-da-quoc-te/ket-qua-bong-da-hom-nay-3-11-chelsea-juventus-thang-hu-via-584362.html', '- VietNamNet cập nhật liên tục lịch thi đấu, kết quả bóng đá các giải đấu đáng chú ý trong nước và quốc tế đêm qua, rạng sáng nay.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/03/01/watford-vs-chelsea-240x160.jpg', NULL, NULL, 1),
+(4, 2, 5, 'Lịch thi đấu bóng đá hôm nay 3/11', 'https://vietnamnet.vn/vn/the-thao/bong-da-quoc-te/lich-thi-dau-bong-da-hom-nay-3-11-584359.html', '- VietNamNet cập nhật liên tục lịch thi đấu, kết quả bóng đá các giải đấu đáng chú ý trong nước và quốc tế đêm qua, rạng sáng nay.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/02/16/everton-vs-tottenham-240x160.jpg', NULL, NULL, 1),
+(5, 2, 5, 'Bí quyết giúp Martial thăng hoa cùng MU', 'https://vietnamnet.vn/vn/the-thao/bong-da-quoc-te/bong-da-anh/bi-quyet-giup-martial-thang-hoa-cung-mu-584357.html', ' - HLV Solskjaer thừa nhận, Martial đã có những thay đổi mang tính tích cực cả trong tập luyện và thi đấu để trở thành hạt nhân chính trên hàng công MU.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/02/16/bi-quyet-giup-martial-thang-hoa-cung-mu-1-240x160.jpg', NULL, NULL, 1),
+(6, 2, 5, 'Abraham chói sáng, Lampard bay cao cùng Chelsea', 'https://vietnamnet.vn/vn/the-thao/bong-da-quoc-te/bong-da-anh/ket-qua-watford-vs-chelsea-abraham-giup-the-blues-bay-cao-584355.html', ' - Abraham trực tiếp ghi bàn cùng một pha kiến tạo mang về chiến thắng nhọc nhằn 2-1 cho Chelsea ngay trên sân của Watford, ở vòng 11 Ngoại hạng Anh.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/03/00/watford-vs-chelsea-abraham-240x160.jpg', NULL, NULL, 1),
+(7, 2, 5, 'Man City nhọc nhằn giành 3 điểm nhờ...&quot;Người đi bộ&quot;', 'https://vietnamnet.vn/vn/the-thao/bong-da-quoc-te/bong-da-anh/ket-qua-man-city-vs-southampton-3-diem-qua-nhoc-nhan-cua-dkvd-584353.html', ' - Walker trở thành người hùng của Man City khi trực tiếp ghi bàn cùng một pha kiến tạo giúp chủ nhà đánh bại Bournemouth 2-1, ở vòng 11 Ngoại hạng Anh.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/02/23/mancity-bournemouth-3-240x160.jpg', NULL, NULL, 1),
+(8, 2, 5, 'Sadio Mane hóa người hùng, Liverpool ngược dòng khó tin', 'https://vietnamnet.vn/vn/the-thao/xem-truc-tiep-bong-da/ket-qua-aston-villa-vs-liverpool-ket-qua-bong-da-anh-584334.html', ' - Sadio Mane ghi bàn thắng quyết định ở phút 94, giúp Liverpool ngược dòng nghẹt thở thắng Aston Villa với tỷ số 2-1.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/03/00/sadio-mane-hoa-nguoi-hung-liverpool-nguoc-dong-kho-tin-4-240x160.jpg', NULL, NULL, 1),
+(9, 2, 5, 'MU thua bẽ bàng trên sân Bournemouth', 'https://vietnamnet.vn/vn/the-thao/xem-truc-tiep-bong-da/ket-qua-bournemouth-vs-mu-ket-qua-bong-da-anh-584329.html', ' - Bournemouth xuất sắc cắt đứt chuỗi 3 trận thắng sân khách của MU nhờ pha lập công duy nhất của Joshua King.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/02/21/bournemouth-1-0-mu-greenwood-sut-doi-cot-h2-240x160.jpg', NULL, NULL, 1),
+(10, 2, 5, 'Thái Lan tái đấu Việt Nam, Dangda cảnh báo đồng đội', 'https://vietnamnet.vn/vn/the-thao/bong-da-viet-nam/thai-lan-dau-viet-nam-teerasil-dangda-canh-bao-thai-lan-584310.html', ' - Tiền đạo kỳ cựu Teerasil Dangda cảnh báo Thái Lan phải tập trung, khi bước vào cuộc chiến với Malaysia và Việt Nam.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/02/11/dangda-thai-lan-viet-nam-240x160.jpg', NULL, NULL, 1),
+(11, 2, 5, 'MU quyết lấy Lautaro Martinez, Arsenal ký Demiral', 'https://vietnamnet.vn/vn/the-thao/tin-the-thao-2-11-mu-ky-lautaro-martinez-arsenal-lay-demiral-584297.html', ' - MU quyết tâm chiêu mộ Lautaro Martinez, Arsenal đàm phán lấy Merih Demiral là những tin thể thao chính hôm nay 2/11.', 'https://vnn-imgs-f.vgcloud.vn/2019/10/26/11/lautaro-martinez-mu-240x160.jpg', NULL, NULL, 1),
+(12, 2, 5, 'Quang Hải, Duy Mạnh nhận quà quý trước khi cùng ĐTVN đấu UAE, Thái Lan', 'https://vietnamnet.vn/vn/the-thao/bong-da-viet-nam/quang-hai-nhan-qua-quy-truoc-khi-hoi-quan-dtvn-dau-uae-thai-lan-584233.html', ' - Tối 01/11, Quang Hải và các đồng đội ở CLB Hà Nội đón nhận Huân chương Lao động hạng Ba trong lễ vinh danh thành tích bóng đá Thủ đô.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/02/06/hanoi1-240x160.jpg', NULL, NULL, 1),
+(13, 2, 5, 'Ông Park mưu cao, tuyển Việt Nam sẽ bùng nổ ở Mỹ Đình', 'https://vietnamnet.vn/vn/the-thao/bong-da-viet-nam/doi-tuyen-viet-nam/hlv-park-hang-seo-muu-cao-tuyen-viet-nam-se-bung-no-o-my-dinh-584221.html', '- Khẩu chiến với HLV Akira Nishino chỉ là cái cớ, để HLV Park Hang Seo giấu đi toan tính toàn thắng cả 2 trận quyết đấu với UAE (14/11), Thái Lan (19/11).  ', 'https://vnn-imgs-f.vgcloud.vn/2019/09/30/21/tuyen-viet-nam-dau-malaysia-thay-park-roi-boi-voi-cong-phuong-240x160.jpg', NULL, NULL, 1),
+(14, 2, 5, 'MU nhận tin sét đánh, Messi trở lại oái oăm', 'https://vietnamnet.vn/vn/the-thao/bong-da-quoc-te/tin-bong-da-2-11-mu-nhan-tin-set-danh-messi-tro-lai-oai-oam-584216.html', '- MU có thể mất cả Rashford, Maguire và Lindelof chuyến làm khách Bournemouth, Messi trở lại oái oăm là những tin bóng đá mới nhất hôm nay, 2/11.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/01/22/mu-de-gea-maguire-lindelof-240x160.jpg', NULL, NULL, 1),
+(15, 2, 5, 'MU bay cao, top 4 xa mà gần', 'https://vietnamnet.vn/vn/the-thao/bong-da-quoc-te/mu-vs-bournemouth-mu-solskjaer-va-tam-giac-quy-584212.html', ' - MU trỗi dậy mạnh mẽ, quyết đua top 4 Premier League, khi Solskjaer có niềm tin vào \'tam giác quỷ\' McTominay - Rashford - Daniel James.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/01/21/daniel-james-rashford-mctominay-240x160.jpg', NULL, NULL, 1),
+(16, 2, 5, 'MU phải bán 7 cầu thủ, Pep lấp lửng sang Serie A', 'https://vietnamnet.vn/vn/the-thao/bong-da-quoc-te/tin-bong-da-9-11-mu-phai-ban-7-cau-thu-pep-doa-sang-serie-a-586459.html', '- MU phải bán 7 cầu thủ, trong đó có Pogba để làm mới đội hình, Pep Guardiola lấp lửng sang Serie A là những tin bóng đá mới nhất hôm nay, 9/11.', 'https://vnn-imgs-f.vgcloud.vn/2019/04/27/17/ronaldo-pep-guardiola-240x160.jpg', NULL, NULL, 1),
+(17, 2, 5, 'Lịch thi đấu bóng đá hôm nay 9/11', 'https://vietnamnet.vn/vn/the-thao/bong-da-quoc-te/lich-thi-dau-bong-da-hom-nay-9-11-586138.html', '- VietNamNet cập nhật liên tục lịch thi đấu, kết quả bóng đá các giải đấu đáng chú ý trong nước và quốc tế đêm qua, rạng sáng nay.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/08/09/chelsea-vs-crystal-palace-240x160.jpg', NULL, NULL, 1),
+(18, 2, 5, 'Grant Thornton Annual Golf Championship 2019 hứa hẹn hấp dẫn', 'https://vietnamnet.vn/vn/the-thao/sea-games/cac-mon-khac/grant-thornton-annual-golf-championship-2019-hua-hen-hap-dan-586498.html', ' - Giải Grant Thornton Annual Golf Championship 2019 sẽ tổ chức vào ngày Chủ Nhật (10/11), tại Sân Gôn Long Biên, Hà Nội, hứa hẹn những cuộc tranh tài hấp dẫn của hơn 100 golfer.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/09/09/golf-240x160.jpeg', NULL, NULL, 1),
+(19, 2, 5, 'HLV Philippe Trouisser kém vui về chiến thắng của U19 Việt Nam', 'https://vietnamnet.vn/vn/the-thao/bong-da-viet-nam/u19-viet-nam-thang-nhoc-guam-hlv-philippe-trouisser-that-vong-586446.html', ' - HLV Philippe Trouisser tỏ ra không hài lòng khi U19 Việt Nam bỏ lỡ rất nhiều cơ hội trong chiến thắng trước Guam, và ông cho rằng bàn thua là lời cảnh tỉnh trước trận gặp U19 Nhật Bản vào ngày 10/11 tới.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/08/21/u19-viet-nam-thang-nhoc-guam-hlv-philippe-trouisser-that-vong-240x160.jpg', NULL, NULL, 1),
+(20, 2, 5, 'Thắng nhọc Guam, U19 Việt Nam chờ tử chiến với U19 Nhật Bản', 'https://vietnamnet.vn/vn/the-thao/bong-da-viet-nam/ket-qua-vong-loai-u19-chau-a-u19-viet-nam-thang-nhoc-u19-guam-585936.html', ' - U19 Việt Nam có chiến thắng khá nhọc nhằn 4-1 trước U19 Guam, ở lượt trận thứ 2 bảng J vòng loại U19 châu Á 2020, tối 8/11. Muốn giành vé trực tiếp dự VCK U19 châu Á thì đội chủ nhà phải đánh bại U19 Nhật Bản sau đây 2 ngày.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/08/21/u19-vietnam-240x160.jpg', NULL, NULL, 1),
+(21, 2, 5, 'Lịch thi đấu của ĐT Việt Nam ở vòng loại World Cup 2022', 'https://vietnamnet.vn/vn/the-thao/bong-da-viet-nam/doi-tuyen-viet-nam/lich-thi-dau-vong-loai-world-cup-2022-cua-doi-tuyen-viet-nam-517963.html', ' - VietNamNet cập nhật liên tục lịch thi đấu và kết quả vòng loại World Cup 2022 của đội tuyển Việt Nam. ', 'https://vnn-imgs-f.vgcloud.vn/2019/10/15/19/quang-hai-240x160.jpg', NULL, NULL, 1),
+(22, 2, 5, 'Bảng xếp hạng tuyển Việt Nam tại vòng loại World Cup 2022', 'https://vietnamnet.vn/vn/the-thao/bong-da-viet-nam/doi-tuyen-viet-nam/bang-xep-hang-tuyen-viet-nam-tai-vong-loai-world-cup-2022-550363.html', ' - VietNamNet cập nhật liên tục bảng xếp hạng của đội tuyển Việt Nam ở vòng loại World Cup 2022 diễn ra từ ngày 5/9/2019 - 9/6/2020.', 'https://vnn-imgs-f.vgcloud.vn/2019/10/10/20/viet-nam-vs-malaysia1-240x160.jpg', NULL, NULL, 1),
+(23, 2, 5, 'Điều kiện để Việt Nam vượt qua vòng loại thứ 2 World Cup 2022', 'https://vietnamnet.vn/vn/the-thao/bong-da-viet-nam/doi-tuyen-viet-nam/dieu-kien-de-tuyen-viet-nam-vuot-qua-vong-loai-thu-2-world-cup-2022-551571.html', ' - Tuyển Việt Nam rơi vào bảng đấu được xem là AFF Cup mở rộng, để vượt qua vòng loại thứ 2 World Cup 2022 khu vực châu Á thì thầy trò HLV Park Hang Seo cần những điều kiện gì?', 'https://vnn-imgs-f.vgcloud.vn/2019/10/11/09/viet-nam-1-240x160.jpg', NULL, NULL, 1),
+(24, 2, 5, 'Thể thức vòng loại World Cup 2022 khu vực châu Á', 'https://vietnamnet.vn/vn/the-thao/the-thuc-vong-loai-world-cup-2022-khu-vuc-chau-a-505450.html', ' - Theo phân bổ của FIFA, châu Á có 4,5 suất tham dự VCK World Cup 2022, nên 12 đội tuyển lọt vào vòng loại cuối cùng của World Cup 2002 khu vực châu Á cũng sẽ giành vé dự VCK Asian Cup 2023.', 'https://vnn-imgs-f.vgcloud.vn/2019/01/28/15/world-cup-2022-240x160.jpg', NULL, NULL, 1),
+(25, 2, 5, 'Kết quả bóng đá hôm nay 9/11', 'https://vietnamnet.vn/vn/the-thao/bong-da-quoc-te/ket-qua-bong-da-hom-nay-9-11-586142.html', '- VietNamNet cập nhật liên tục lịch thi đấu, kết quả bóng đá các giải đấu đáng chú ý trong nước và quốc tế đêm qua, rạng sáng nay.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/08/09/norwich-city-vs-watford-240x160.jpg', NULL, NULL, 1),
+(26, 2, 5, 'U19 Thái Lan thua sốc U19 Campuchia', 'https://vietnamnet.vn/vn/the-thao/bong-da-quoc-te/ket-qua-vong-loai-u19-chau-a-u19-thai-lan-thua-soc-u19-campuchia-586435.html', ' -  Sau khi giành chiến thắng với tỷ số 21-0, U19 Thái Lan bất ngờ nhận thất bại với tỷ số 1-2 trước U19 Campuchia ở lượt trận thứ 3 bảng G vòng loại U19 châu Á 2020, chiều 8/11.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/08/21/u19-thailan-u19-campuchia-240x160.jpg', NULL, NULL, 1),
+(27, 2, 5, 'MU được kêu gọi dẹp quyền sếp bự Ed Woodward', 'https://vietnamnet.vn/vn/the-thao/bong-da-quoc-te/bong-da-anh/mu-duoc-keu-goi-dep-quyen-sep-bu-ed-woodward-586412.html', '- Cựu danh thủ Paul Scholes kêu gọi đội bóng cũ MU phải dẹp quyền can thiệp vào bóng đá của Phó Chủ tịch Ed Woodward, thì Quỷ đỏ mới khá lên được.', 'https://vnn-imgs-f.vgcloud.vn/2019/08/07/21/ed-woodward-240x160.jpg', NULL, NULL, 1),
+(28, 2, 5, 'AFF Awards 2019: HLV Park Hang Seo, Quang Hải xuất sắc nhất', 'https://vietnamnet.vn/vn/the-thao/bong-da-viet-nam/doi-tuyen-viet-nam/aff-awards-2019-hlv-park-hang-seo-quang-hai-xuat-sac-nhat-586199.html', ' - Không nằm ngoài dự đoán, HLV Park Hang Seo nhận giải HLV nam xuất sắc nhất năm, trong khi Nguyễn Quang Hải được xướng tên ở hạng mục Cầu thủ xuất sắc nhất ở lễ trao giải AFF 2019 tối (8/11), tại Hà Nội.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/08/21/aff-awards-2019-hlv-park-hang-seo-quang-hai-xuat-sac-nhat-1-240x160.jpg', NULL, NULL, 1),
+(29, 2, 5, 'Real Madrid &quot;gả&quot; James Rodriguez cho MU lấy Pogba', 'https://vietnamnet.vn/vn/the-thao/tin-chuyen-nhuong/real-madrid-ga-james-rodriguez-cho-mu-lay-pogba-586408.html', ' - Lãnh đạo đội bóng Hoàng gia sẵn sàng gán James Rodriguez cho MU như là một phần trong bản hợp đồng chiêu mộ Paul Pogba.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/08/18/real-madrid-ga-james-rodgriguez-cho-mu-lay-pogba-240x160.jpg', NULL, NULL, 1),
+(30, 2, 5, 'Đè bẹp Mông Cổ, U19 Nhật Bản thách thức U19 Việt Nam', 'https://vietnamnet.vn/vn/the-thao/xem-truc-tiep-bong-da/ket-qua-vong-loai-u19-chau-a-u19-nhat-ban-thang-u19-mong-co-9-0-586302.html', ' - Với trình đội vượt trội, U19 Nhật Bản dễ dàng đánh bại U19 Mông Cổ với tỷ số 9-0, ở lượt trận thứ 2 bảng J vòng loại U19 châu Á 2020, chiều 8/11.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/08/21/u19-nhat-ban-240x160.jpg', NULL, NULL, 1),
+(46, 2, 2, 'Chủ tịch Quốc hội ‘chấm điểm’ 4 bộ trưởng sau chất vấn', 'https://vietnamnet.vn/vn/thoi-su/quoc-hoi/chu-tich-quoc-hoi-cham-diem-4-bo-truong-sau-chat-van-586099.html', 'Chủ tịch QH nhận xét Bộ trưởng TT&amp;TT trả lời mạch lạc, có kinh nghiệm thực tiễn; Bộ trưởng Nội vụ cầu thị, thẳng thắn...', 'https://vnn-imgs-f.vgcloud.vn/2019/11/07/22/chu-tich-qh-cham-diem-4-bo-truong-sau-chat-van-240x160.JPG', NULL, NULL, 1),
+(47, 2, 2, 'Làm sao để mỗi người dân làm giàu hợp pháp trên mảnh đất quê hương', 'https://vietnamnet.vn/vn/thoi-su/chinh-tri/lam-sao-de-moi-nguoi-dan-lam-giau-hop-phap-tren-manh-dat-que-huong-586266.html', 'Thủ tướng nhấn mạnh: \'Phải làm sao để mỗi người dân Việt Nam có cơ hội làm giàu hợp pháp trên chính mảnh đất quê hương\'.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/08/15/lam-sao-de-moi-nguoi-dan-lam-giau-hop-phap-tren-manh-dat-que-huong-240x160.jpg', NULL, NULL, 1),
+(48, 2, 2, 'Mỗi tháng chặn được từ 10-15 triệu tin nhắn rác', 'https://vietnamnet.vn/vn/thoi-su/quoc-hoi/moi-thang-chan-duoc-tu-10-15-trieu-tin-nhan-rac-586156.html', 'Bộ trưởng TT&amp;TT Nguyễn Mạnh Hùng cho biết, mỗi tháng ghi nhận khoảng 10.000 số máy thực hiện cuộc gọi rác, làm ảnh hưởng đến hàng triệu người.   ', 'https://vnn-imgs-f.vgcloud.vn/2019/11/08/09/hang-trieu-nguoi-dang-bi-anh-huong-tu-cuoc-goi-rac-240x160.JPG', NULL, NULL, 1),
+(49, 2, 2, '75 triệu dữ liệu của người dân được đưa vào hệ thống', 'https://vietnamnet.vn/vn/thoi-su/quoc-hoi/75-trieu-du-lieu-cua-nguoi-dan-duoc-dua-vao-he-thong-586277.html', 'Bộ trưởng TT&amp;TT Nguyễn Mạnh Hùng nói, cố gắng năm 2020 dự án về cơ sở dữ liệu dân cư sẽ cơ bản hoàn chỉnh.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/08/14/75-trieu-du-lieu-cua-nguoi-dan-duoc-dua-vao-he-thong-2-240x160.JPG', NULL, NULL, 1),
+(50, 2, 2, 'Không gian mạng không có ánh mắt nhìn thì có hành động dislike', 'https://vietnamnet.vn/vn/thoi-su/quoc-hoi/khong-gian-mang-khong-co-anh-mat-nhin-thi-co-hanh-dong-dislike-586146.html', 'Bộ trưởng Nguyễn Mạnh Hùng cho hay, trên không gian mạng, nếu như đọc một tin xấu là vô hình chung chúng ta nuôi cái tin xấu và làm cho nó lan nhanh.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/08/09/khong-gian-mang-khong-co-anh-mat-nhin-thi-co-hanh-dong-dislike-2-240x160.jpg', NULL, NULL, 1),
+(51, 2, 2, 'Mạng quốc gia như cơ thể người, làm sao để có nhiều oxy, không đột quỵ', 'https://vietnamnet.vn/vn/thoi-su/quoc-hoi/bo-truong-cong-an-noi-ve-an-ninh-mang-toi-pham-mang-truoc-quoc-hoi-586314.html', 'Bộ trưởng Tô Lâm thể hiện quan điểm ủng hộ sự phát triển về công nghệ mạng, coi đây là hệ huyết mạch rất quan trọng, như mạch máu với cơ thể con người.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/08/15/bo-truong-to-lam-khong-quoc-gia-nao-du-luc-doi-pho-voi-an-ninh-mang-1-240x160.JPG', NULL, NULL, 1),
+(52, 2, 2, 'Phê chuẩn Phó chủ tịch UBND tỉnh Thái Nguyên', 'https://vietnamnet.vn/vn/thoi-su/chinh-tri/phe-chuan-pho-chu-tich-ubnd-tinh-thai-nguyen-586411.html', 'Thủ tướng phê chuẩn kết quả bầu bổ sung chức vụ Phó chủ tịch UBND tỉnh Thái Nguyên nhiệm kỳ 2016-2021 đối với ông Lê Quang Tiến, Tỉnh ủy viên, Chủ tịch UBND TP Thái Nguyên. ', 'https://vnn-imgs-a1.vgcloud.vn/baochinhphu.vn//Uploaded/nguyenminhdiem/2019_11_08/ThaiNguyen-240x160.jpg', NULL, NULL, 1),
+(53, 2, 2, 'Bộ Ngoại giao nói về làn sóng phản đối Thành Long tới Việt Nam', 'https://vietnamnet.vn/vn/thoi-su/bo-ngoai-giao-noi-ve-lan-song-phan-doi-thanh-long-toi-viet-nam-586001.html', 'Chiều nay, Bộ Ngoại giao tổ chức họp báo thường kỳ. Phó phát ngôn viên Ngô Toàn Thắng trả lời các câu hỏi của phóng viên.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/07/17/bo-ngoai-giao-noi-ve-lan-song-phan-doi-thanh-long-toi-viet-nam-1-240x160.jpg', NULL, NULL, 1),
+(54, 2, 2, '‘Trưởng Ban Tổ chức TƯ phê bình tôi 2 lần về thi tuyển lãnh đạo’', 'https://vietnamnet.vn/vn/thoi-su/quoc-hoi/truong-ban-to-chuc-trung-uong-phe-binh-toi-2-lan-ve-thi-tuyen-lanh-dao-585939.html', '\'Đồng chí Phạm Minh Chính, ủy viên Bộ Chính trị, Trưởng Ban Tổ chức TƯ phê bình tôi 2 lần về chủ trương thi tuyển các chức danh lãnh đạo, quản lý\', Bộ trưởng Nội vụ cho hay.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/08/09/truong-ban-to-chuc-tu-phe-binh-toi-2-lan-ve-thi-tuyen-lanh-dao-240x160.jpg', NULL, NULL, 1),
+(55, 2, 2, 'Thủ tướng chia buồn với gia đình 39 nạn nhân người Việt tử vong ở Anh', 'https://vietnamnet.vn/vn/thoi-su/thu-tuong-chia-buon-voi-gia-dinh-39-nan-nhan-nguoi-viet-tu-vong-o-anh-586076.html', ' Đây không chỉ là nỗi đau thương vô hạn của gia đình người thiệt mạng mà còn là nỗi đau của cả cộng đồng, của từng trái tim người Việt... - Thủ tướng chia sẻ trong thư chia buồn tới gia đình 39 người thiệt mạng ở Anh.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/08/08/thu-tuong-day-la-noi-dau-thuong-vo-han-cua-tung-trai-tim-nguoi-viet-1-240x160.jpg', NULL, NULL, 1),
+(56, 2, 2, 'Trưa nay, Chính phủ bàn phương án đưa 39 thi thể người Việt về nước', 'https://vietnamnet.vn/vn/thoi-su/39-nguoi-viet-chet-trong-container-chinh-phu-ban-dua-thi-the-ve-nuoc-586181.html', 'Trao đổi với báo chí bên hành lang QH, Bộ trưởng, Chủ nhiệm VPCP Mai Tiến Dũng cho biết trưa nay Phó Thủ tướng thường trực Trương Hòa Bình sẽ họp với các bên để đưa ra các phương án đưa nạn nhân về nước.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/08/09/photo1522668268157-1522668268158321183468-240x160.jpg', NULL, NULL, 1),
+(57, 2, 2, 'Bộ trưởng Nội vụ: Quy định bổ nhiệm cần tới 7 bằng cấp, rất phiền hà', 'https://vietnamnet.vn/vn/thoi-su/quoc-hoi/bo-truong-noi-vu-quy-dinh-bo-nhiem-can-toi-7-bang-cap-rat-phien-ha-585899.html', 'Quy định bổ nhiệm của mình cần tới 7 bằng cấp. Tôi thấy nhiều quá. Cái này không phải Bộ Nội vụ tự đặt, Bộ trưởng Lê Vĩnh Tân nói.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/07/11/db-phung-van-hung-2-240x160.jpg', NULL, NULL, 1),
+(58, 2, 2, 'Bộ trưởng Công thương: Không phải chúng tôi vô cảm với gian lận xuất xứ', 'https://vietnamnet.vn/vn/thoi-su/quoc-hoi/bo-truong-cong-thuong-chung-toi-khong-vo-cam-voi-gian-lan-xuat-xu-585843.html', 'Bộ trưởng Trần Tuấn Anh cam kết với các ĐBQH và cử tri là sẽ làm hết trách nhiệm, không có thái độ vô cảm hay thờ ơ với việc gian lận xuất xứ.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/07/10/1-1-240x160.JPG', NULL, NULL, 1),
+(59, 2, 2, 'Rất nhiều hồ sơ cán bộ không khớp thời gian công tác, năm sinh', 'https://vietnamnet.vn/vn/thoi-su/quoc-hoi/rat-nhieu-ho-so-can-bo-khong-khop-thoi-gian-cong-tac-nam-sinh-586016.html', 'Theo Bộ trưởng Nội vụ Lê Vĩnh Tân, rất nhiều hồ sơ cán bộ, công chức so với bảo hiểm y tế, thời gian công tác không khớp nhau, ngày tháng năm sinh không giống...', 'https://vnn-imgs-f.vgcloud.vn/2019/11/07/16/noi-vu-240x160.jpg', NULL, NULL, 1),
+(60, 2, 2, 'Ông Lê Hải Bình làm Phó ban chuyên trách về thông tin đối ngoại', 'https://vietnamnet.vn/vn/thoi-su/ong-le-hai-binh-lam-pho-ban-chuyen-trach-ve-thong-tin-doi-ngoai-585709.html', 'Ban Bí thư phân công ông Lê Hải Bình, Vụ trưởng Vụ Thông tin đối ngoại và hợp tác quốc tế, Ban Tuyên giáo TƯ, làm Phó trưởng ban chuyên trách Ban chỉ đạo Công tác thông tin đối ngoại.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/07/11/ong-vo-van-thuong-chuc-mung-ong-le-hai-binh-anh-vgp-240x160.jpg', NULL, NULL, 1),
+(106, 2, 3, 'Vách đá đổ sập vùi chết 4 công nhân trong mỏ than ở Quảng Ninh', 'https://vietnamnet.vn/vn/thoi-su/vach-da-do-sap-vui-chet-4-cong-nhan-trong-mo-than-o-quang-ninh-586559.html', 'Nhóm công nhân đang vận chuyển đất đá, bốc xúc bằng xe tải thì vách đá đổ sập làm 4 người chết tại chỗ, một người bị thương.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/09/12/vach-da-do-sap-vui-chet-4-cong-nhan-trong-mo-than-o-quang-ninh-1-240x160.jpg', NULL, NULL, 1),
+(107, 2, 3, 'Công an ở Cần Thơ xin lỗi 2 người bị oan sai, bồi thường hơn 900 triệu', 'https://vietnamnet.vn/vn/thoi-su/cong-an-cai-rang-xin-loi-2-nguoi-bi-oan-sai-boi-thuong-900-trieu-586554.html', 'Công an quận Cái Răng tổ chức lễ xin lỗi và bồi thường hơn 900 triệu đồng vì gây oan sai cho 2 người dân. ', 'https://vnn-imgs-f.vgcloud.vn/2019/11/09/11/cong-an-o-can-tho-xin-loi-2-nguoi-bi-oan-sai-boi-thuong-hon-900-trieu-240x160.jpg', NULL, NULL, 1),
+(108, 2, 3, 'Gia đình ở Hải Phòng suy sụp khi người thân chết trong container ở Anh', 'https://vietnamnet.vn/vn/thoi-su/39-nguoi-viet-chet-trong-container-gia-dinh-o-hai-phong-suy-sup-586137.html', 'Hải Phòng có 3 người, Hải Dương có 1 người tử vong trong số 39 người Việt Nam gặp nạn tại Anh.  ', 'https://vnn-imgs-f.vgcloud.vn/2019/11/08/09/23a-iqzd-240x160.jpg', NULL, NULL, 1),
+(109, 2, 3, 'Bão số 6 đổ bộ, 2 tỉnh cho học sinh nghỉ học, cấm tụ tập xem bão', 'https://vietnamnet.vn/vn/thoi-su/bao-so-6-hoc-sinh-2-tinh-duoc-nghi-hoc-cam-tu-tap-xem-bao-586550.html', 'Phú Yên và Bình Định cho học sinh nghỉ học trong ngày 11/11 khi bão số 6 đổ bộ. Các trường chủ động ứng phó, khắc phục hậu quả mưa bão.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/09/11/viewimage-240x160.jpg', NULL, NULL, 1),
+(110, 2, 3, 'Xe đầu kéo tông chết thanh niên trẻ trên quốc lộ 19 ở Bình Định', 'https://vietnamnet.vn/vn/thoi-su/an-toan-giao-thong/xe-dau-keo-tong-chet-thanh-nien-tre-tren-quoc-lo-19-o-binh-dinh-586547.html', 'Vụ tai nạn xảy ra lúc 6h30 sáng nay. Nạn nhân tử vong là anh Võ Tuấn Thân (SN 1999, quê ở huyện Tuy Phước, tỉnh Bình Định).', 'https://vnn-imgs-f.vgcloud.vn/2019/11/09/11/xe-dau-keo-tong-chet-nguoi-tren-quoc-lo-19-240x160.jpg', NULL, NULL, 1),
+(111, 2, 3, 'Người phụ nữ chết loã thể trong phòng trọ khoá trái ở Bình Dương', 'https://vietnamnet.vn/vn/thoi-su/nguoi-phu-nu-chet-loa-the-trong-phong-tro-khoa-trai-o-binh-duong-586474.html', 'Ngửi thấy mùi hôi khó chịu bốc ra từ một phòng trọ, những người xung quanh ngó vào kiểm tra thì phát hiện một phụ nữ nằm chết trong tình trạng lõa thể. ', 'https://vnn-imgs-f.vgcloud.vn/2019/11/09/08/nguoi-phu-nu-chet-loa-the-trong-phong-tro-khoa-trai-o-binh-duong-1-240x160.jpg', NULL, NULL, 1),
+(112, 2, 3, 'Ô tô lao xuống hồ nước, tài xế Nghệ An mắc kẹt tử vong', 'https://vietnamnet.vn/vn/thoi-su/an-toan-giao-thong/o-to-lao-xuong-ho-nuoc-tai-xe-nghe-an-mac-ket-tu-vong-586513.html', 'Ô tô lao xuống hồ nước, 1 người ngồi trong xe đạp cửa thoát ra ngoài, còn tài xế bị mắc kẹt trong cabin.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/09/09/o-to-lao-xuong-ho-nuoc-tai-xe-mac-ket-tu-vong-1-240x160.jpg', NULL, NULL, 1),
+(113, 2, 3, 'Nữ sinh học viện ở Hà Nội sinh con rồi bỏ vào thùng rác', 'https://vietnamnet.vn/vn/thoi-su/nu-sinh-hoc-vien-o-ha-noi-sinh-con-roi-bo-vao-thung-rac-586158.html', ' Công an quận Đống Đa, Hà Nội đã xác định được danh tính người mẹ trong vụ bé sơ sinh bị bỏ trong thùng rác ở ngõ Văn Chương 2.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/08/09/nu-sinh-hoc-vien-o-ha-noi-sinh-con-roi-bo-con-vao-thung-rac-240x160.jpg', NULL, NULL, 1),
+(114, 2, 3, 'Nguyên Bí thư Tỉnh ủy Nghệ An: Tôi thấy sốc, buồn và đau', 'https://vietnamnet.vn/vn/thoi-su/39-nguoi-viet-chet-tai-anh-nguyen-bi-thu-nghe-an-soc-buon-va-dau-586019.html', 'Nguyên Bí thư Tỉnh ủy Nghệ An Lê Doãn Hợp đau xót khi thấy những bàn thờ đầy hoa trắng, những đứa trẻ bơ vơ và bố mẹ già kiệt quệ vì mất con.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/08/10/nguyen-bi-thu-tinh-uy-nghe-an-toi-thay-soc-buon-va-dau-240x160.JPG', NULL, NULL, 1),
+(115, 2, 3, 'Dấu hiệu \'lợi ích nhóm\' tạo cạnh tranh không lành mạnh trong thị trường nước sạch', 'https://vietnamnet.vn/vn/thoi-su/quoc-hoi/dau-hieu-loi-ich-nhom-tao-canh-tranh-khong-lanh-manh-thi-truong-nuoc-sach-586501.html', 'Trong phiên chất vấn Thủ tướng tại QH chiều qua, ĐB Lưu Bình Nhưỡng đặt vấn đề về việc nhà máy nước sông Đà bị đầu độc, có dấu hiệu \'lợi ích nhóm\' tạo ra cạnh tranh không lành mạnh trong thị trường nước sạch.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/08/16/15h15-db-luu-binh-nhuong-240x160.jpg', NULL, NULL, 1),
+(116, 2, 3, 'Đại sứ quán Việt Nam thông tin về quá trình hồi hương 39 nạn nhân Việt', 'https://vietnamnet.vn/vn/thoi-su/dai-su-quan-viet-nam-thong-tin-ve-qua-trinh-hoi-huong-39-nan-nhan-viet-586084.html', 'Các gia đình của 39 nạn nhân chết trong container ở Anh có thể liên hệ với Bộ phận Lãnh sự tại Việt Nam qua đường dây nóng.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/08/09/dai-su-quan-viet-nam-thong-tin-ve-qua-trinh-hoi-huong-39-nan-nhan-viet-240x160.jpg', NULL, NULL, 1),
+(117, 2, 3, 'Hồi sinh sông Tô Lịch: Dân không quan tâm chỉ số, chỉ mong hết mùi hôi', 'https://vietnamnet.vn/vn/thoi-su/moi-truong/hoi-sinh-song-to-lich-dan-khong-quan-tam-chi-so-chi-mong-het-mui-hoi-586108.html', 'Người dân sống cạnh các dòng sông chết không quan tâm đến các chỉ số kỹ thuật, điều họ mong mỏi nhất là cơ quan quản lý nhà nước xử lý được triệt để mùi hôi thối.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/08/01/tai-sao-nguoi-dan-song-canh-to-lich-va-nhung-dong-song-chet-phai-chiu-mui-hoi-thoi-2-240x160.jpg', NULL, NULL, 1),
+(118, 2, 3, 'Quê nhà Hà Tĩnh lên phương án đón nạn nhân tử nạn ở Anh', 'https://vietnamnet.vn/vn/thoi-su/que-nha-ha-tinh-len-phuong-an-don-nan-nhan-tu-nan-o-anh-586246.html', 'Lãnh đạo huyện Can Lộc (Hà Tĩnh) cùng các đơn vị liên quan hôm qua đã tới thăm hỏi, động viên 8 gia đình có con tử vong trong xe container ở Anh.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/08/12/lanh-dao-huyen-o-ha-tinh-neu-duoc-phep-thi-se-ra-ha-noi-don-nan-nhan-1-240x160.jpg', NULL, NULL, 1),
+(119, 2, 3, 'Lý do Bí thư Thành ủy Tam Kỳ xin nghỉ hưu trước 2 tháng', 'https://vietnamnet.vn/vn/thoi-su/chong-tham-nhung/ly-do-bi-thu-thanh-uy-tam-ky-xin-nghi-huu-truoc-2-thang-586236.html', 'Trong số 20 cá nhân liên quan đến việc chuyển nhượng 2 lô đất A51 và A52 mà Thanh tra tỉnh Quảng Nam kiến nghị kiểm điểm có ông Nguyễn Văn Lúa, Bí thư Thành ủy Tam Kỳ.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/08/11/thanh-tra-chi-ra-nhieu-sai-pham-trong-vu-chuyen-nhuong-2-lo-dat-a51-a52-cho-vo-cuu-bi-thu-tinh-uy-quang-nam-vu-ngoc-hoang-1-240x160.jpg', NULL, NULL, 1),
+(120, 2, 3, 'Dự báo thời tiết 9/11, bão số 6 giật cấp 15, biển động dữ dội', 'https://vietnamnet.vn/vn/thoi-su/du-bao-thoi-tiet-9-11-bao-so-6-giat-cap-15-bien-dong-du-doi-586443.html', 'Dự báo trong những giờ tới, bão số 6 di chuyển theo hướng Tây, mỗi giờ đi được 5 -10km và có khả năng mạnh thêm.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/08/21/du-bao-thoi-tiet-9-11-bao-so-6-giat-cap-15-bien-dong-du-doi-240x160.jpg', NULL, NULL, 1),
+(121, 2, 4, 'Gian lận, ăn chặn tiền hỗ trợ dịch bệnh, lệnh xử nghiêm', 'https://vietnamnet.vn/vn/kinh-doanh/thi-truong/xu-nghiem-truong-hop-khai-khong-tieu-huy-dich-ta-lon-chau-phi-truc-loi-586533.html', 'Thứ trưởng Bộ NN-PTNT Phùng Đức Tiến vừa ký công văn yêu cầu kiểm tra, xử lý nghiêm các trường hợp gian lận, trục lợi chính sách hỗ trợ tiêu huỷ dịch tả lợn châu Phi.', 'https://vnn-imgs-f.vgcloud.vn/2019/05/13/16/dich-ta-lon-chau-phi-1-240x160.jpg', NULL, NULL, 1),
+(122, 2, 4, 'Giá vàng hôm nay 9/11, dấu hiệu đáng lo ngày cuối tuần', 'https://vietnamnet.vn/vn/kinh-doanh/tai-chinh/gia-vang-hom-nay-9-11-sut-giam-cuoi-tuan-586417.html', 'So với phiên giao dịch đầu tuần, giá vàng đã có tuần giảm giá mạnh. Thị trường vàng trong nước rời ngưỡng 42 triệu đồng/lượng.', 'https://vnn-imgs-f.vgcloud.vn/2019/05/01/15/gia-vang-hom-nay-2-5-giam-cho-quyet-dinh-fed-240x160.jpg', NULL, NULL, 1),
+(123, 2, 4, 'Mua sắm cho vui, hội độc thân chi tiền tỷ dọn sạch 30 kho hàng', 'https://vietnamnet.vn/vn/kinh-doanh/dau-tu/dai-gia-boi-thu-ngay-doc-than-585159.html', 'CEO tự đi giao hàng, thuê Cristiano Ronaldo làm quảng cáo,... các ông lớn thương mại điện tử cạnh tranh khốc liệt để thắng lớn ngày độc thân (11/11).', 'https://vnn-imgs-f.vgcloud.vn/2018/02/06/09/shop-online-chi-hon-20-trieu-thang-tiep-thi-240x160.jpg', NULL, NULL, 1),
+(124, 2, 4, 'Sân thượng rau quả sạch xanh tươi bốn mùa của bà mẹ hai con ở Hà Nội', 'https://vietnamnet.vn/vn/kinh-doanh/thi-truong/san-thuong-rau-qua-sach-xanh-tuoi-bon-mua-cua-ba-me-hai-con-o-ha-noi-586551.html', 'Có kinh nghiệm trồng cây được hơn 3 năm nay, chị Liên cảm thấy hào hứng hơn mỗi ngày khi trồng và chăm sóc rau quả sạch trên sân thượng để phục vụ gia đình mình.', 'https://vnn-imgs-a1.vgcloud.vn/thoidai.com.vn/stores/news_dataimages/linh.nguyenth/112019/09/09/2112_76262118_2445557765717982_8169666888125644800_n-240x160.jpg', NULL, NULL, 1),
+(125, 2, 4, 'Kinh hoàng thịt bò khô 90.000 đồng/kg để mấy năm không hỏng', 'https://vietnamnet.vn/vn/kinh-doanh/thi-truong/kinh-hoang-thit-bo-kho-90-000-dong-kg-de-may-nam-khong-hong-586520.html', 'Rẻ, màu sắc đẹp mắt, phong phú chủng loại và đặc biệt thơm ngon. Đó là những ưu điểm vượt trội của các loại bò khô tràn lan ngoài thị trường.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/09/10/kinh-hoang-thit-bo-kho-240x160.jpg', NULL, NULL, 1),
+(126, 2, 4, 'Giá đắt đỏ nhất 5 năm, Bộ trưởng chỉ mong người dân thông cảm', 'https://vietnamnet.vn/vn/kinh-doanh/thi-truong/gia-thit-lon-cao-nhat-trong-vong-5-nam-bo-truong-mong-nguoi-dan-thong-cam-586242.html', 'Giá thịt lợn nhiều nơi đã tăng lên 73.000 đồng/kg, cao nhất trong vòng 5 năm qua. Bộ trưởng Nguyễn Xuân Cường mong dân thông cảm vì giá thành sản xuất cao, cần chia sẻ với những khó khăn người chăn nuôi gánh chịu.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/06/17/thit-lon-240x160.jpg', NULL, NULL, 1),
+(127, 2, 4, 'Vì sao ông chủ Bavico Đinh Tiến Sử bị truy nã đặc biệt?', 'https://vietnamnet.vn/vn/kinh-doanh/doanh-nhan/vi-sao-ong-chu-bavico-dinh-tien-su-bi-truy-na-dac-biet-586504.html', 'Khi bị cơ quan điều tra tống đạt quyết định khởi tố bị can về tội lừa đảo mua bán căn hộ, ông chủ hệ thống khách sạn Bavico Đinh Tiến Sử, cũng là bị cáo của vụ án tổ chức bán dâm, đã bỏ trốn.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/09/09/su-240x160.jpg', NULL, NULL, 1),
+(128, 2, 4, 'Loài \'cá có chân\', tự mọc lại phần cơ thể bị mất khiến dân Việt \'phát sốt\'', 'https://vietnamnet.vn/vn/kinh-doanh/thi-truong/loai-ca-co-chan-tu-moc-lai-phan-co-the-bi-mat-khien-dan-viet-phat-sot-586483.html', 'Điều đáng nói là con vật này đã gần như bị tuyệt chủng trong tự nhiên.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/09/08/loai-ca-co-chan-tu-moc-lai-phan-co-the-bi-mat-tung-khien-dan-choi-viet-phat-sot-240x160.jpg', NULL, NULL, 1),
+(129, 2, 4, 'Loại thịt lợn Việt đắt gấp 2 bò Mỹ, trước chê bỏ rẻ, nay sốt lùng khắp chợ', 'https://vietnamnet.vn/vn/kinh-doanh/thi-truong/dat-gap-doi-bo-my-nac-nong-heo-nay-duoc-lung-mua-khap-cho-ha-thanh-585665.html', 'Dù giá đắt gấp đôi, thậm chí còn đắt gấp 3 lần thịt bò Mỹ, loại thịt nạc nọng lợn (nạc nọng heo) lại bất ngờ gây sốt, được mọi người lùng mua khắp chợ Hà Thành.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/06/17/thit-lon-1-240x160.jpg', NULL, NULL, 1),
+(130, 2, 4, 'Cảnh báo khẩn, thiết bị điện mặt trời có \'đường lưỡi bò phi pháp\'', 'https://vietnamnet.vn/vn/kinh-doanh/dau-tu/thiet-bi-dien-mat-troi-co-duong-luoi-bo-evn-canh-bao-khan-586333.html', 'Tập đoàn Điện lực Việt Nam vừa ra cảnh báo khẩn về việc xuất hiện loại thiết bị điện mặt trời có chứa \'đường lưỡi bò phi pháp\'', 'https://vnn-imgs-f.vgcloud.vn/2019/11/08/15/thiet-bi-dien-mat-troi-co-duong-luoi-bo-evn-canh-bao-khan-1-240x160.jpg', NULL, NULL, 1),
+(131, 2, 4, 'Tài sản tỷ phú Trung Quốc \'bốc hơi\' nhiều nhất trong 2018', 'https://vietnamnet.vn/vn/kinh-doanh/tai-chinh/tai-san-ty-phu-trung-quoc-boc-hoi-nhieu-nhat-trong-2018-586548.html', 'Năm 2018, tổng khối tài sản của các tỷ phú thế giới giảm 388 tỷ USD, xuống 8.539 tỷ USD, trong đó, mức giảm mạnh nhất thuộc về Trung Quốc.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/09/11/ty-phu-240x160.jpg', NULL, NULL, 1),
+(192, 2, 4, '‘Miếng bánh’ còn bỏ ngỏ của thị trường điện mặt trời Bà Rịa - Vũng Tàu', 'https://vietnamnet.vn/vn/kinh-doanh/mieng-banh-con-bo-ngo-cua-thi-truong-dien-mat-troi-ba-ria-vung-tau-586392.html', 'Việt Nam là quốc gia có tiềm năng lớn để phát triển điện mặt trời, đặc biệt, ở các tỉnh như Bà Rịa - Vũng Tàu, nguồn năng lượng mặt trời có sẵn quanh năm, ổn định và còn nhiều cơ hội để phát triển.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/08/17/mieng-banh-con-bo-ngo-cua-thi-truong-dien-mat-troi-ba-ria-vung-tau-3-240x160.jpg', NULL, NULL, 1),
+(193, 2, 4, 'Nuôi con mèo 160 triệu, ăn pate gan gà, dinh dưỡng yến mạch', 'https://vietnamnet.vn/vn/kinh-doanh/thi-truong/nuoi-con-meo-tay-an-pate-gan-ga-dinh-duong-yen-mach-586470.html', 'Mèo tây - mèo ta là cách gọi để phân biệt những chú mèo Việt Nam hoặc mèo có giống từ nước ngoài.', 'https://vnn-imgs-f.vgcloud.vn/2019/11/09/07/meo-black-golden-1-240x160.jpg', NULL, NULL, 1),
+(194, 2, 4, '5 bí kíp giúp tiết kiệm gas giảm hẳn chi phí', 'https://vietnamnet.vn/vn/kinh-doanh/tu-van-tai-chinh/5-bi-kip-giup-tiet-kiem-gas-giam-han-chi-phi-586499.html', 'Những mẹo nhỏ này giúp các bà nội trợ giảm được năng lượng ga tiêu tốn mỗi khi nấu nướng.', 'https://vnn-imgs-a1.vgcloud.vn/images.kienthuc.net.vn/zoom/800/uploaded/trucchinh2/2019_11_08/bep-ga-1-1414_ULQN-240x160.jpg', NULL, NULL, 1),
+(195, 2, 4, 'Bí quyết chọn cam chính hãng không hóa chất \'chuẩn không cần chỉnh\'', 'https://vietnamnet.vn/vn/kinh-doanh/tu-van-tai-chinh/bi-quyet-chon-cam-chinh-hang-khong-hoa-chat-chuan-khong-can-chinh-586496.html', 'Khi bạn mua cam hãy nhớ những tuyệt chiêu dưới đây sẽ giúp bạn chọn được những quả cam ngon ngọt, mọng nước, không nhiễm chất bảo quản.', 'https://vnn-imgs-a1.vgcloud.vn/images.kienthuc.net.vn/zoom/800/uploaded/trucchinh2/2019_11_08/cam-ngon-1032_QPAP-240x160.jpg', NULL, NULL, 1);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `category`
---
-ALTER TABLE `category`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `migrations`
---
-ALTER TABLE `migrations`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `news`
 --
 ALTER TABLE `news`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `website`
---
-ALTER TABLE `website`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `url` (`url`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `category`
---
-ALTER TABLE `category`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `migrations`
---
-ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `website`
---
-ALTER TABLE `website`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=211;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
