@@ -46,6 +46,22 @@ Route::group(['middleware' => 'jwt.auth'], function() {
         Route::get('/', 'NewsController@getNewsByWebsiteIdAndCategoryId');
         Route::get('/detail', 'NewsController@getById');
     });
+
+    Route::group(['prefix' => 'activity'], function() {
+        Route::get('/', 'ActivityController@getByUserId');
+    });
+
+    Route::group(['prefix' => 'rating'], function() {
+        Route::get('/get-by-news-id', 'RatingController@getRatingByNewsId');
+        Route::post('/update', 'RatingController@updateRating')->name("updateRating");
+    });
+
+    Route::group(['prefix' => 'commnet'], function() {
+        Route::get('/get-by-news-id', 'CommentController@getCommentByNewsId')->name("getCommentByNewsId");
+        Route::post('/save', 'CommentController@saveComment')->name("saveComment");
+    });
+
+
     
 
 

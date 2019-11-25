@@ -43,11 +43,17 @@ class CrawlHelper
         $content = $dom->find(".box-subcate-style4");      
          
         foreach ($content as $value) {
+            $url = "https://vietnamnet.vn".$value->find("a",0)->href;
+
+            $body = $this->run($url);
+            $content = $body->find("#ArticleContent",0);
+
             $arr[] = [
                 'title' => $value->find("a img",0)->alt,
-                'url' => "https://vietnamnet.vn".$value->find("a",0)->href,
+                'url' => $url,
                 'image' => $value->find("a img",0)->src,
-                'short_content' => $value->find(".box-subcate-style4-caption .box-subcate-style4-lead",0)->innertext
+                'short_content' => $value->find(".box-subcate-style4-caption .box-subcate-style4-lead",0)->innertext,
+                'content' => $content
             ];            
         }
         return $arr;

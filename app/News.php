@@ -15,6 +15,7 @@ class News extends Model
         'title',
         'url',
         'short_content',
+        'content',
         'image',
         'created_at',
         'updated_at',
@@ -41,6 +42,7 @@ class News extends Model
                     'title' => $value['title'],
                     'url' => $value['url'],
                     'short_content' => $value['short_content'] ?? '',
+                    'content' => $value['content'] ?? '',
                     'image' => $value['image'],
                 ];
 
