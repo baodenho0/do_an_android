@@ -71,6 +71,15 @@ class CrawlHelper
 		return $this->generalCrawlVietNamNet("https://vietnamnet.vn/vn/thoi-su/");
 	}
 
+    public function crawlXoSo(){
+        $dom = $this->run("https://ketqua.net/xo-so-mien-nam");    
+        // echo ($dom); die; 
+
+        $content = $dom->find(".table-kq-bold-border",0);      
+        $header = "<style>table tr td{border: 1px solid #000;} table{width:100%}</style><meta name='viewport' content='width=device-width, initial-scale=1.0'>";
+        return $header.$content;
+    }
+
 	
 
 }

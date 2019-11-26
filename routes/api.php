@@ -62,10 +62,12 @@ Route::group(['middleware' => 'jwt.auth'], function() {
     });
 
 
+
     
 
 
 });
+    Route::get("/ket-qua-xo-so","XoSoController@index");
 
 //===========================
 });
