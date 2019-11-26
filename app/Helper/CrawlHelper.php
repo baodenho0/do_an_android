@@ -81,7 +81,18 @@ class CrawlHelper
         // echo ($dom); die; 
 
         $content = $dom->find(".table-kq-bold-border",0);      
-        $header = "<style>table tr td{border: 1px solid #000;} table{width:100%}</style><meta name='viewport' content='width=device-width, initial-scale=1.0'>";
+        $header = "<link href='//static.ketqua.net/main_bootstrap/css/bootstrap.min.css' rel='stylesheet'><style>table tr td{border: 1px solid #000;} table{width:100%}</style><meta name='viewport' content='width=device-width, initial-scale=1.0'>";
+        return $header.$content;
+    }
+
+    public function crawlBongDa(){
+        
+        $dom = $this->run("https://bongda24h.vn/bong-da/ket-qua.html");    
+        // echo ($dom); die; 
+        $content = $dom->find(".section",0);    
+        $content = str_replace("/images/mt3.jpg", "", $content);
+        // echo $content; die;  
+        $header = "<link rel='stylesheet' type='text/css' href='https://bongda24h.vn/websites/css/stylev3.css' /><meta name='viewport' content='width=device-width, initial-scale=1.0'><style>.bg_kq{padding:0px}</style>";
         return $header.$content;
     }
 
