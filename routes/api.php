@@ -69,6 +69,7 @@ Route::group(['middleware' => 'jwt.auth'], function() {
 });
     Route::get("/ket-qua-xo-so","XoSoController@index");
     Route::get("/ket-qua-bong-da","BongDaController@index");
+    Route::get("/video","VideoController@index");
 
 //===========================
 });

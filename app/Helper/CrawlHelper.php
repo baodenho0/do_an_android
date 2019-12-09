@@ -96,6 +96,10 @@ class CrawlHelper
         return $header.$content;
     }
 
+    public function crawlVideoDanTri(){
+        return $this->run("https://dantri.com.vn/video/latest/0-1-16-0.htm"); 
+    }
+
 	
 
 }
