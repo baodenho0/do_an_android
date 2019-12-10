@@ -24,7 +24,7 @@
     </style>
 </head>
 
-<body>
+<body   @isset($dark) style="background: {{$dark['background']}};color: {{$dark['color']}}" @endisset>
     <div>
         {!!$news->content!!}
     </div>

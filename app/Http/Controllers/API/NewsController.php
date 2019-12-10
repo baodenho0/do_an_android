@@ -34,6 +34,14 @@ class NewsController extends Controller
 
          $data["rating"] = $this->rating->getByUserIdAndNewsId($authUserId, $request->id)->rate ?? "";
 
+         if($request->type == "dark"){
+            $data["dark"] = [
+                           "background" => "#696868",
+                           "color" => "#fff"
+            ];
+         }
+         
+
    		$this->activity->saveActivity($authUserId, $data['news']->id);
 
    		return view("news.detail",$data);
