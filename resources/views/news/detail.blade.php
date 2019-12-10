@@ -19,7 +19,7 @@
         	width: 80%;
         }
         body{
-        	margin-bottom: 10em;
+        	/*margin-bottom: 10em;*/
         }
     </style>
 </head>
